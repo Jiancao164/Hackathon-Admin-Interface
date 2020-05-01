@@ -35,7 +35,7 @@ export default class Nutrition extends Component {
                     <h2>Nutrition</h2>
                     <ol>
                         {this.state.nutrition && this.state.nutrition.map(nutrition =>
-                            <li>
+                            <li key={nutrition.id}>
                                 <div className={"row"}>
                                     <div className={"col-11"}>
                                         <input

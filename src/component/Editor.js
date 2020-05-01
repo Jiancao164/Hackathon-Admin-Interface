@@ -42,7 +42,7 @@ export default class Editor extends Component {
                     <h2>Ingredients</h2>
                     <ol>
                         {this.state.ingredients && this.state.ingredients.map(ingredient =>
-                            <li>
+                            <li key={ingredient.id}>
                                 <div className={"row"}>
                                     <div className={"col-11"}>
                                         <input type="text"

@@ -35,7 +35,7 @@ export default class Process extends Component {
                     <h2>Directions</h2>
                     <ol>
                         {this.state.process && this.state.process.map(process =>
-                            <li>
+                            <li key={process.id}>
                                 <div className={"row"}>
                                     <div className={"col-11"}>
                                         <textarea
