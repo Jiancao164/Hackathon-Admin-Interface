@@ -20,6 +20,7 @@ export default class Editor extends Component {
     };
     addIngredients = async () => {
         await this.setState({ingredients: [...this.state.ingredients, ""]});
+        await updateIngredients(this.props.match.params.rid, this.state.ingredients);
         // await createIngredient(this.props.match.params.rid);
     };
 
