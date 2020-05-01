@@ -33,7 +33,11 @@ export default class Recipe extends Component{
     };
 
     updateRecipe = async (rid) => {
-        await updateRecipe(rid, this.state.recipes.filter(el => {return el.id===rid})[0])
+        const items = await findRecipes().then(results => results.filter(el => {return el.id===rid})[0]);
+        await updateRecipe(rid, {...items, title: this.state.recipes.filter(el => {return el.id===rid})[0].title});
+        await findRecipes().then(results => this.setState({
+            recipes: results
+        }));
         this.setState({editId: ''})
     };
 
