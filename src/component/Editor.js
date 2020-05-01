@@ -19,9 +19,11 @@ export default class Editor extends Component {
         }))
     };
     addIngredients = async () => {
-        await this.setState({ingredients: [...this.state.ingredients, ""]});
-        // await updateIngredients(this.props.match.params.rid, this.state.ingredients);
-        // await createIngredient(this.props.match.params.rid);
+        await updateIngredients(this.props.match.params.rid, this.state.ingredients);
+        await createIngredient(this.props.match.params.rid);
+        await findIngredients(this.props.match.params.rid).then(results => this.setState({
+            ingredients: results
+        }))
     };
 
     updateIngredients = async () => {
@@ -43,7 +45,7 @@ export default class Editor extends Component {
                     <h2>Ingredients</h2>
                     <ol>
                         {this.state.ingredients && this.state.ingredients.map(ingredient =>
-                            <li key={new Date().getTime()}>
+                            <li key={ingredient.id}>
                                 <div className={"row"}>
                                     <div className={"col-11"}>
                                         <input type="text"

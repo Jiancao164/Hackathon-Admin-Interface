@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {createProcess, findProcesses, updateProcess} from "../services/ProcessService";
+import {createIngredient, findIngredients, updateIngredients} from "../services/IngredientService";
 
 export default class Process extends Component {
     constructor(props) {
@@ -14,8 +15,20 @@ export default class Process extends Component {
         }))
     };
     addProcess = async () => {
-        await this.setState({process: [...this.state.process, ""]});
+        await updateProcess(this.props.rid, this.state.process);
+        await createProcess(this.props.rid);
+        await findProcesses(this.props.rid).then(results => this.setState({
+            process: results
+        }))
+
         // await createProcess(this.props.match.params.rid);
+    };
+    addIngredients = async () => {
+        await updateIngredients(this.props.match.params.rid, this.state.ingredients);
+        await createIngredient(this.props.match.params.rid);
+        await findIngredients(this.props.match.params.rid).then(results => this.setState({
+            ingredients: results
+        }))
     };
 
     updateProcess = async () => {
@@ -39,6 +52,7 @@ export default class Process extends Component {
                                 <div className={"row"}>
                                     <div className={"col-11"}>
                                         <textarea
+                                                rows={4}
                                                onChange={(e) => this.setState({
                                                    process: this.state.process.map(el => (el.id === process.id ? Object.assign({}, el, { processDetail: e.target.value }) : el))
                                                })}

@@ -6,7 +6,7 @@ export const findProcesses = async (rid) =>
 export const createProcess= (rid) =>
     fetch(`${HEROKU_SERVER_URL}/recipes/${rid}/steps`, {
         method: 'POST',
-        body: JSON.stringify({ingredientDetail: ""}),
+        body: JSON.stringify({processDetail: ""}),
         headers: {
             'content-type': 'application/json'
         }

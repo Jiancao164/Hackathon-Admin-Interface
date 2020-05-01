@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {createNutrition, findNutrition, findNutritiones, updateNutrition} from "../services/NutritionService";
+import {createIngredient, findIngredients, updateIngredients} from "../services/IngredientService";
 
 export default class Nutrition extends Component {
     constructor(props) {
@@ -13,9 +14,13 @@ export default class Nutrition extends Component {
             nutrition: results
         }))
     };
+
     addNutrition = async () => {
-        await this.setState({nutrition: [...this.state.nutrition, ""]});
-        // await createNutrition(this.props.match.params.rid);
+        await updateNutrition(this.props.rid, this.state.nutrition);
+        await createNutrition(this.props.rid);
+        await findNutrition(this.props.rid).then(results => this.setState({
+            nutrition: results
+        }))
     };
 
     updateNutrition = async () => {
