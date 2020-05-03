@@ -3,6 +3,18 @@ import {HEROKU_SERVER_URL} from "../common/constant";
 export const findVideos = async () =>
     await fetch(`${HEROKU_SERVER_URL}/videos`).then(response => response.json());
 
+export const findCalendars = async () =>
+    await fetch(`${HEROKU_SERVER_URL}/calendars`).then(response => response.json());
+
+export const updateCalendar= (calendar) =>
+    fetch(`${HEROKU_SERVER_URL}/calendars`, {
+        method: 'PUT',
+        body: JSON.stringify(calendar),
+        headers: {
+            'content-type': 'application/json'
+        }
+    }).then(response => response.json());
+
 export const findVideoById = async (vid) =>
     await fetch(`${HEROKU_SERVER_URL}/videos/${vid}`).then(response => response.json());
 

@@ -1,18 +1,29 @@
 import React, {Component} from 'react'
-import {createVideo, deleteVideo, findVideoById, findVideos, updateVideo} from "../../services/VideoService";
+import {
+    createVideo,
+    deleteVideo,
+    findCalendars,
+    findVideoById,
+    findVideos, updateCalendar,
+    updateVideo
+} from "../../services/VideoService";
 import {updateIngredients} from "../../services/IngredientService";
 
 export default class Video extends Component{
     componentDidMount = async () => {
         await findVideos().then(results => this.setState({
             videos: results
+        }));
+        await findCalendars().then(result => this.setState({
+            calendar: result[0]
         }))
     };
 
     state = {
         videos: [],
         editing: false,
-        editId: ''
+        editId: '',
+        calendar: {}
     };
 
     createVideo = async () => {
@@ -39,6 +50,10 @@ export default class Video extends Component{
             videos: results
         }));
         this.setState({editId: ''})
+    };
+
+    updateCalendar = async (calendar) => {
+      await updateCalendar(calendar);
     };
 
     render() {
@@ -73,6 +88,20 @@ export default class Video extends Component{
                 <button
                     onClick={this.createVideo}
                     className={"btn btn-success"}>+</button>
+                <h1>
+                    Calendar URL
+                </h1>
+                <div>
+                    <input type="text"
+                           onChange={(e) => this.setState({
+                               calendar: {...this.state.calendar, url: e.target.value}
+                           })}
+                           className="form-control" placeholder="Calendar URL" aria-label="Username"
+                           value={this.state.calendar.url} aria-describedby="basic-addon1"/>
+                    <button
+                        onClick={() => this.updateCalendar(this.state.calendar)}
+                        className={"btn btn-success btn-block"}>Save</button>
+                </div>
             </div>
 
         )
