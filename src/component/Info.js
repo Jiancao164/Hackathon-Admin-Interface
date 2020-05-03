@@ -8,12 +8,13 @@ export default class Info extends Component {
         this.state = {
             preTime: '',
             cookTime: '',
-            servings: ''
+            servings: '',
+            description: ''
         };
     }
     componentDidMount = async () => {
         await findRecipeById(this.props.rid).then(results => this.setState({
-            servings: results.servings, preTime: results.preTime, cookTime: results.cookTime
+            servings: results.servings, preTime: results.preTime, cookTime: results.cookTime, description: results.description
         }));
     };
     //
@@ -24,7 +25,7 @@ export default class Info extends Component {
 
     updateRecipe = async (rid) => {
         await updateRecipe(rid, {...await findRecipeById(rid).then(result => result),
-            preTime:this.state.preTime, cookTime:this.state.cookTime, servings: this.state.servings});
+            preTime:this.state.preTime, cookTime:this.state.cookTime, servings: this.state.servings, description: this.state.description});
     };
 
 
@@ -68,6 +69,19 @@ export default class Info extends Component {
                                 value={this.state.servings} aria-describedby="basic-addon1"/>
                         </div>
                     </div>
+                    <div className={"row"}>
+                        <div className={"col-2"}>Description: </div>
+                        <div className={"col-10"}>
+                            <textarea
+                                onChange={(e) => this.setState({
+                                    description: e.target.value
+                                })}
+                                rows={4}
+                                className="info form-control" placeholder="description" aria-label="Username"
+                                value={this.state.description} aria-describedby="basic-addon1"/>
+                        </div>
+                    </div>
+
 
 
 
