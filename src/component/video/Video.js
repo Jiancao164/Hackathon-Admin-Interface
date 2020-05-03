@@ -23,7 +23,8 @@ export default class Video extends Component{
         videos: [],
         editing: false,
         editId: '',
-        calendar: {}
+        calendar: {},
+        url:''
     };
 
     createVideo = async () => {
@@ -52,8 +53,8 @@ export default class Video extends Component{
         this.setState({editId: ''})
     };
 
-    updateCalendar = async (calendar) => {
-      await updateCalendar(calendar);
+    updateCalendar = async () => {
+      await updateCalendar({...this.state.calendar, url: this.state.url});
     };
 
     render() {
@@ -89,17 +90,17 @@ export default class Video extends Component{
                     onClick={this.createVideo}
                     className={"btn btn-success"}>+</button>
                 <h1>
-                    Calendar URL
+                    Current calendar URL：{this.state.calendar && this.state.calendar.url}
                 </h1>
                 <div>
                     <input type="text"
                            onChange={(e) => this.setState({
-                               calendar: {...this.state.calendar, url: e.target.value}
+                               url: e.target.value
                            })}
                            className="form-control" placeholder="Calendar URL" aria-label="Username"
-                           value={this.state.calendar.url} aria-describedby="basic-addon1"/>
+                           value={this.state.url} aria-describedby="basic-addon1"/>
                     <button
-                        onClick={() => this.updateCalendar(this.state.calendar)}
+                        onClick={() => this.updateCalendar()}
                         className={"btn btn-success btn-block"}>Save</button>
                 </div>
             </div>
