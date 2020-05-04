@@ -17,6 +17,7 @@ export default class Video extends Component{
         await findCalendars().then(result => this.setState({
             calendar: result[0]
         }))
+
     };
 
     state = {
@@ -24,7 +25,8 @@ export default class Video extends Component{
         editing: false,
         editId: '',
         calendar: {},
-        url:''
+        url:'',
+        subscribe: []
     };
 
     createVideo = async () => {
@@ -89,6 +91,10 @@ export default class Video extends Component{
                 <button
                     onClick={this.createVideo}
                     className={"btn btn-success"}>+</button>
+                <div>
+                    <h1>Subscribe:
+                    <a href={"/subscribes"}>Link</a></h1>
+                </div>
                 <h1>
                     Current calendar URL：{this.state.calendar && this.state.calendar.url}
                 </h1>

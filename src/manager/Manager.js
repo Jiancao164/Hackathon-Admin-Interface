@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 import Editor from "../component/Editor";
 import Video from "../component/video/Video";
 import VideoDetail from "../component/video/VideoDetail";
+import Subscribes from "../component/Subscribes";
 
 export default class Manager extends Component{
     render() {
@@ -22,6 +23,13 @@ export default class Manager extends Component{
                         exact={true}
                         render={(props) =>
                             <Video
+                                {...props}/>
+                        }/>
+                    <Route
+                        path="/subscribes"
+                        exact={true}
+                        render={(props) =>
+                            <Subscribes
                                 {...props}/>
                         }/>
                     <Route
